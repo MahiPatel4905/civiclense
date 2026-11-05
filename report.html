@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#F8FAFC">
+    <meta name="description" content="Report civic issues and track their progress with CivicFix AI.">
+    <title>Dashboard | CivicFix AI</title>
+
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="css/report.css">
+</head>
+
+<body>
+<header class="site-header">
+    <div class="container header-inner">
+        <a class="brand" href="report.html" aria-label="CivicFix AI dashboard">
+            <span class="brand-mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M4 18.5V10l8-5 8 5v8.5"
+                          stroke="currentColor" stroke-width="1.8"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9 18.5v-5h6v5M2.5 21h19"
+                          stroke="currentColor" stroke-width="1.8"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="m9.5 9.5 1.7 1.7 3.5-3.5"
+                          stroke="currentColor" stroke-width="1.8"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+            <span>CivicFix <span class="brand-light">AI</span></span>
+        </a>
+
+        <button class="mobile-menu-toggle" id="mobile-menu-toggle"
+                type="button" aria-label="Open navigation"
+                aria-expanded="false" aria-controls="main-nav">
+            <span></span><span></span><span></span>
+        </button>
+
+        <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+            <a href="report.html" class="nav-link active" aria-current="page">Dashboard</a>
+            <a href="#report-form-section" class="nav-link">Report an Issue</a>
+            <a href="my-reports.html" class="nav-link">My Reports</a>
+        </nav>
+
+        <div class="header-actions">
+            <div class="user-chip">
+                <span class="user-avatar" id="user-avatar" aria-hidden="true">U</span>
+                <span id="user-name">Citizen</span>
+            </div>
+            <button class="button button-secondary sign-out-btn"
+                    id="sign-out-btn" type="button">Sign out</button>
+        </div>
+    </div>
+</header>
+
+<main class="container dashboard">
+    <section class="welcome-section">
+        <div class="welcome-copy">
+            <p class="eyebrow">
+                <span class="eyebrow-dot" aria-hidden="true"></span>
+                CITIZEN PORTAL
+            </p>
+            <h1>Let's make your city better.</h1>
+            <p>Report civic issues, track your complaints, and help build a cleaner, safer community.</p>
+            <a class="button button-primary welcome-button" href="#report-form-section">
+                <span aria-hidden="true">＋</span> Report an Issue
+            </a>
+        </div>
+
+        <div class="welcome-art" aria-hidden="true">
+            <div class="art-orbit orbit-one"></div>
+            <div class="art-orbit orbit-two"></div>
+            <div class="art-building building-back"></div>
+            <div class="art-building building-front">
+                <span></span><span></span><span></span>
+                <span></span><span></span><span></span>
+            </div>
+            <div class="art-check">✓</div>
+            <div class="art-ground"></div>
+        </div>
+    </section>
+
+    <section class="stats-grid" aria-label="Your report statistics">
+        <article class="stat-card">
+            <span class="stat-icon total-icon" aria-hidden="true">▤</span>
+            <div><p>Total reports</p><h2 id="total-count">0</h2>
+                <span class="stat-description">Complaints submitted</span></div>
+        </article>
+        <article class="stat-card">
+            <span class="stat-icon progress-icon" aria-hidden="true">◷</span>
+            <div><p>In progress</p><h2 id="progress-count">0</h2>
+                <span class="stat-description">Being addressed</span></div>
+        </article>
+        <article class="stat-card">
+            <span class="stat-icon resolved-icon" aria-hidden="true">✓</span>
+            <div><p>Resolved</p><h2 id="resolved-count">0</h2>
+                <span class="stat-description">Issues marked resolved</span></div>
+        </article>
+        <article class="stat-card">
+            <span class="stat-icon pending-icon" aria-hidden="true">◌</span>
+            <div><p>Awaiting action</p><h2 id="pending-count">0</h2>
+                <span class="stat-description">Open or under review</span></div>
+        </article>
+    </section>
+
+    <section class="content-grid">
+        <section class="panel report-panel" id="report-form-section">
+            <div class="panel-heading">
+                <div>
+                    <p class="eyebrow">MAKE A DIFFERENCE</p>
+                    <h2>Report a civic issue</h2>
+                    <p>Describe the problem, add a photo, and mark its location on the map.</p>
+                </div>
+                <span class="heading-icon" aria-hidden="true">＋</span>
+            </div>
+
+            <form id="issue-form">
+                <div class="form-group">
+                    <label for="issue-description">Describe the issue <span>*</span></label>
+                    <textarea id="issue-description" name="description" rows="4"
+                              maxlength="1500" required
+                              placeholder="For example: There is a large pothole near the main road..."
+                              aria-describedby="description-help description-count"></textarea>
+                    <div class="field-footer">
+                        <span id="description-help">Include details that help identify the problem.</span>
+                        <span id="description-count" aria-live="polite">0 / 1500</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="issue-image">Upload a photo <span>*</span></label>
+                    <label class="upload-area" id="upload-area" for="issue-image">
+                        <span class="upload-icon" aria-hidden="true">↑</span>
+                        <span class="upload-title">Choose an image to upload</span>
+                        <span class="upload-subtitle">JPG, PNG or WebP · Maximum 8 MB</span>
+                    </label>
+                    <input type="file" id="issue-image" name="image"
+                           accept="image/jpeg,image/png,image/webp" required>
+                    <div class="image-preview" id="image-preview" hidden>
+                        <img id="preview-image" alt="Preview of the selected issue">
+                        <div class="preview-info">
+                            <span id="preview-filename"></span>
+                            <button type="button" class="text-button" id="remove-image-btn">Remove image</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group location-group" id="issue-location-section">
+                    <div class="location-heading">
+                        <div>
+                            <label for="selected-address">Issue location <span>*</span></label>
+                            <p class="location-help">Click the map to pin the exact issue location, or use your current location.</p>
+                        </div>
+                        <span class="map-pin-symbol" aria-hidden="true">⌖</span>
+                    </div>
+
+                    <div class="map-toolbar">
+                        <span class="map-instruction">
+                            <span class="map-status-dot" aria-hidden="true"></span>
+                            Select a point on the map
+                        </span>
+                        <button class="button button-secondary location-button"
+                                type="button" id="live-location-btn">
+                            <span aria-hidden="true">◎</span> Use my location
+                        </button>
+                    </div>
+
+                    <div id="issue-map" role="application"
+                         aria-label="Map for selecting the civic issue location"></div>
+
+                    <p class="map-caption">
+                        <span aria-hidden="true">ⓘ</span>
+                        Tap anywhere on the map to place or move your pin.
+                    </p>
+
+                    <label class="address-label" for="selected-address">Selected address</label>
+                    <textarea id="selected-address" name="address" rows="2"
+                              maxlength="500" required
+                              placeholder="Your selected location will appear here..."
+                              aria-describedby="address-help"></textarea>
+                    <p class="address-hint" id="address-help">The address fills automatically when you select a map location.</p>
+                    <p class="location-message" id="location-message" role="status" aria-live="polite" hidden></p>
+                </div>
+
+                <div class="form-alert" id="form-alert"
+                     role="alert" aria-live="assertive" hidden></div>
+
+                <button class="button button-primary submit-button"
+                        type="submit" id="submit-report-btn">
+                    Submit report <span aria-hidden="true">→</span>
+                </button>
+
+                <p class="privacy-note">Your report will be processed to help route the issue to the appropriate team.</p>
+            </form>
+        </section>
+
+        <aside class="side-column">
+            <section class="map-visual-card" aria-label="Location selection guide">
+                <div class="visual-topline">
+                    <span class="visual-icon" aria-hidden="true">⌖</span>
+                    <span class="visual-tag">LOCATION MAPPING</span>
+                </div>
+                <h2>Every location matters.</h2>
+                <p>Help the response team find the exact place where your community needs attention.</p>
+
+                <div class="visual-map-art" aria-hidden="true">
+                    <div class="map-road road-one"></div>
+                    <div class="map-road road-two"></div>
+                    <div class="map-road road-three"></div>
+                    <div class="map-block block-one"></div>
+                    <div class="map-block block-two"></div>
+                    <div class="map-block block-three"></div>
+                    <div class="map-block block-four"></div>
+                    <div class="map-green-space"></div>
+                    <div class="visual-pin"><span></span></div>
+                    <div class="visual-pulse"></div>
+                </div>
+
+                <div class="visual-feature">
+                    <span class="feature-check" aria-hidden="true">✓</span>
+                    <div><strong>Precise issue location</strong>
+                        <p>Pin the problem, not just your neighbourhood.</p></div>
+                </div>
+                <div class="visual-feature">
+                    <span class="feature-check" aria-hidden="true">✓</span>
+                    <div><strong>Faster identification</strong>
+                        <p>A clear location helps the right team respond.</p></div>
+                </div>
+            </section>
+        </aside>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container footer-inner">
+        <a class="brand footer-brand" href="report.html" aria-label="CivicFix AI dashboard">
+            <span class="brand-mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M4 18.5V10l8-5 8 5v8.5" stroke="currentColor"
+                          stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9 18.5v-5h6v5M2.5 21h19" stroke="currentColor"
+                          stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="m9.5 9.5 1.7 1.7 3.5-3.5" stroke="currentColor"
+                          stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+            <span>CivicFix <span class="brand-light">AI</span></span>
+        </a>
+        <p>Building better communities, one report at a time.</p>
+    </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="js/report.js"></script>
+</body>
+</html>

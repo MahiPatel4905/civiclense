@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Department Dashboard | CivicFix</title>
+
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/department.css">
+</head>
+<body>
+  <div class="department-layout">
+    <aside class="sidebar" id="sidebar">
+
+      <!-- Homepage-matching CivicFix branding -->
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M4 18.5V10l8-5 8 5v8.5"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"/>
+            <path d="M9 18.5v-5h6v5M2.5 21h19"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"/>
+            <path d="m9.5 9.5 1.7 1.7 3.5-3.5"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <div class="brand-copy">
+          <div class="brand-name">
+            CivicFix <span class="brand-light">AI</span>
+          </div>
+          <div class="brand-subtitle">Department Portal</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#dashboard" class="nav-link active">
+          <span class="nav-icon">▦</span>
+          Dashboard
+        </a>
+        <a href="#complaintsSection" class="nav-link">
+          <span class="nav-icon">☷</span>
+          Assigned Complaints
+        </a>
+        <a href="#progressSection" class="nav-link">
+          <span class="nav-icon">◷</span>
+          In Progress
+        </a>
+        <a href="#completedSection" class="nav-link">
+          <span class="nav-icon">✓</span>
+          Completed
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="account-info">
+          <div class="account-avatar" id="departmentAvatar">D</div>
+          <div class="account-details">
+            <strong id="departmentName">Department</strong>
+            <span id="departmentEmail"></span>
+          </div>
+        </div>
+        <button class="logout-button" id="logoutButton" type="button">
+          <span>↪</span> Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <main class="main-content" id="dashboard">
+      <header class="topbar">
+        <button
+          class="mobile-menu-button"
+          id="mobileMenuButton"
+          type="button"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+        >☰</button>
+
+        <div class="breadcrumb">
+          <span>CivicFix</span>
+          <span aria-hidden="true">/</span>
+          <strong>Department Dashboard</strong>
+        </div>
+
+        <button class="refresh-button" id="refreshButton" type="button">
+          <span>↻</span> Refresh
+        </button>
+      </header>
+
+      <section class="page-heading">
+        <div>
+          <p class="eyebrow">DEPARTMENT WORKSPACE</p>
+          <h1>Department Dashboard</h1>
+          <p class="page-description">
+            Review assigned complaints and manage complaint progress.
+          </p>
+        </div>
+        <div class="today-label" id="currentDate"></div>
+      </section>
+
+      <div class="feedback-message" id="pageMessage" role="status" hidden></div>
+
+      <section class="stats-grid" aria-label="Complaint statistics">
+        <article class="stat-card">
+          <div class="stat-icon slate-icon">▦</div>
+          <div>
+            <p>Total Complaints</p>
+            <h2 id="totalComplaints">0</h2>
+            <span class="stat-note">Assigned to your department</span>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon amber-icon">◷</div>
+          <div>
+            <p>Pending</p>
+            <h2 id="pendingComplaints">0</h2>
+            <span class="stat-note">Awaiting department action</span>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon blue-icon">↻</div>
+          <div>
+            <p>In Progress</p>
+            <h2 id="inProgressComplaints">0</h2>
+            <span class="stat-note">Currently being addressed</span>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon green-icon">✓</div>
+          <div>
+            <p>Completed</p>
+            <h2 id="completedComplaints">0</h2>
+            <span class="stat-note">Resolved by your department</span>
+          </div>
+        </article>
+      </section>
+
+      <section class="complaints-section" id="complaintsSection">
+        <div class="section-heading">
+          <div>
+            <h2>Assigned Complaints</h2>
+            <p>Review complaint details and take the appropriate action.</p>
+          </div>
+          <span class="result-count" id="complaintResultCount">0 complaints</span>
+        </div>
+
+        <div class="filters-bar">
+          <label class="search-box">
+            <span aria-hidden="true">⌕</span>
+            <input
+              type="search"
+              id="complaintSearch"
+              placeholder="Search complaints..."
+              aria-label="Search complaints"
+            >
+          </label>
+
+          <select id="statusFilter" aria-label="Filter by status">
+            <option value="all">All statuses</option>
+            <option value="pending">Pending</option>
+            <option value="in_progress">In Progress</option>
+            <option value="completed">Completed</option>
+            <option value="rejection_requested">Rejection Requested</option>
+            <option value="rejected">Rejected</option>
+          </select>
+        </div>
+
+        <div class="loading-state" id="loadingState">
+          <span class="loading-spinner"></span>
+          <p>Loading assigned complaints...</p>
+        </div>
+
+        <div class="empty-state" id="emptyState" hidden>
+          <div class="empty-icon">☷</div>
+          <h3>No complaints found</h3>
+          <p>Try changing your search or status filter.</p>
+        </div>
+
+        <div class="complaint-list" id="complaintList"></div>
+      </section>
+
+      <section class="lower-section" id="progressSection">
+        <h2>In Progress</h2>
+        <p>Complaints currently being addressed by your department.</p>
+        <div class="mini-list" id="inProgressList"></div>
+      </section>
+
+      <section class="lower-section" id="completedSection">
+        <h2>Completed Complaints</h2>
+        <p>Complaints marked as completed by your department.</p>
+        <div class="mini-list" id="completedList"></div>
+      </section>
+
+      <footer class="page-footer">
+        <span>CivicFix Department Portal</span>
+        <span>© <span id="currentYear"></span> CivicFix</span>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Rejection request modal -->
+  <div class="modal-backdrop" id="rejectionModal" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="rejectionTitle">
+      <button class="modal-close" id="closeRejectionModal" type="button" aria-label="Close">×</button>
+      <div class="modal-icon">!</div>
+      <h2 id="rejectionTitle">Request Complaint Rejection</h2>
+      <p>Send your rejection request to the admin for review. The complaint will not be rejected until the admin decides.</p>
+
+      <form id="rejectionForm">
+        <label for="rejectionReason">Reason for rejection <span>*</span></label>
+        <select id="rejectionReason" required>
+          <option value="">Select a reason</option>
+          <option value="Duplicate complaint">Duplicate complaint</option>
+          <option value="Insufficient information">Insufficient information</option>
+          <option value="Outside department jurisdiction">Outside department jurisdiction</option>
+          <option value="Invalid complaint">Invalid complaint</option>
+          <option value="Other">Other</option>
+        </select>
+
+        <label for="rejectionExplanation">
+          Additional explanation <span id="explanationRequiredMark" hidden>*</span>
+        </label>
+        <textarea id="rejectionExplanation" rows="4" maxlength="1000" placeholder="Add any extra details for the admin (optional)..."></textarea>
+        <div class="character-count"><span id="reasonCharacterCount">0</span>/1000</div>
+
+        <div class="modal-feedback" id="rejectionFormMessage" role="alert" hidden></div>
+
+        <div class="modal-actions">
+          <button class="button-secondary" id="cancelRejection" type="button">Cancel</button>
+          <button class="button-danger" id="submitRejection" type="submit">Send to Admin</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Wrong department modal -->
+  <div class="modal-backdrop" id="wrongDepartmentModal" hidden>
+    <div class="confirm-modal-card" role="dialog" aria-modal="true" aria-labelledby="wrongDepartmentTitle">
+      <button class="confirm-modal-close" id="closeWrongDepartmentModal" type="button" aria-label="Close">×</button>
+
+      <div class="confirm-modal-icon" aria-hidden="true">↗</div>
+      <p class="confirm-modal-eyebrow">ADMIN REASSIGNMENT</p>
+      <h2 class="confirm-modal-title" id="wrongDepartmentTitle">Send to Admin?</h2>
+      <p class="confirm-modal-description">
+        This complaint appears to belong to another department. Send it to the admin for manual reassignment?
+      </p>
+
+      <div class="confirm-modal-note">
+        <span aria-hidden="true">ⓘ</span>
+        <span>The admin will review the complaint and assign it to the appropriate department.</span>
+      </div>
+
+      <div class="confirm-feedback" id="wrongDepartmentFormMessage" role="alert" hidden></div>
+
+      <div class="confirm-modal-actions">
+        <button class="confirm-cancel-button" id="cancelWrongDepartment" type="button">Cancel</button>
+        <button class="confirm-submit-button" id="confirmWrongDepartment" type="button">Confirm Reassignment</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Complaint details modal -->
+  <div class="modal-backdrop" id="complaintDetailsModal" hidden>
+    <div class="modal-card details-modal-card" role="dialog" aria-modal="true" aria-labelledby="detailsTitle">
+      <button class="modal-close" id="closeDetailsModal" type="button" aria-label="Close">×</button>
+      <p class="eyebrow">COMPLAINT INFORMATION</p>
+      <h2 id="detailsTitle">Complaint Details</h2>
+      <div class="details-content" id="complaintDetailsContent"></div>
+    </div>
+  </div>
+
+  <script src="js/department.js"></script>
+</body>
+</html>

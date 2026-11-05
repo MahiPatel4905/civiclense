@@ -1,0 +1,308 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CivicFix AI helps residents report civic issues and track their resolution.">
+    <title>CivicFix AI | Better Cities, Together</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <nav class="navbar container" aria-label="Main navigation">
+            <a class="brand" href="index.html" aria-label="CivicFix AI home">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M4 18.5V10l8-5 8 5v8.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M9 18.5v-5h6v5M2.5 21h19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="m9.5 9.5 1.7 1.7 3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+                <span>CivicFix <span class="brand-light">AI</span></span>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle"
+                    type="button" aria-label="Open navigation"
+                    aria-expanded="false" aria-controls="navLinks">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <div class="nav-links" id="navLinks">
+                <a class="nav-link active" href="index.html">Home</a>
+                <a class="nav-link" href="#how-it-works">How it works</a>
+                <a class="nav-link" href="#services">Services</a>
+                <a class="nav-link" href="#about">About</a>
+                <div class="nav-actions">
+                    <a class="button button-secondary button-small" href="login.html">Log in</a>
+                    <a class="button button-primary button-small" href="register.html">
+                        Get started <span aria-hidden="true">→</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero section-padding">
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <div class="eyebrow">
+                        <span class="eyebrow-dot"></span>
+                        SMARTER CIVIC SERVICES
+                    </div>
+
+                    <h1>Better cities begin with <span>one report.</span></h1>
+
+                    <p class="hero-description">
+                        Report local issues, let AI help identify the problem,
+                        and follow its progress toward resolution — all in one place.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a class="button button-primary button-large" href="register.html">
+                            Report an issue <span aria-hidden="true">→</span>
+                        </a>
+                        <a class="button button-outline button-large" href="#how-it-works">
+                            See how it works
+                        </a>
+                    </div>
+
+                    <div class="hero-note">
+                        <span class="note-check" aria-hidden="true">✓</span>
+                        <span>Transparent reporting. Smarter routing. Clear updates.</span>
+                    </div>
+                </div>
+
+                <div class="hero-visual" aria-label="Illustration of the CivicFix AI reporting dashboard">
+                    <div class="visual-orb orb-one"></div>
+                    <div class="visual-orb orb-two"></div>
+
+                    <div class="dashboard-preview">
+                        <div class="preview-topbar">
+                            <div class="window-dots" aria-hidden="true">
+                                <span></span><span></span><span></span>
+                            </div>
+                            <span class="preview-label">CIVICFIX / OVERVIEW</span>
+                            <span class="preview-avatar">CF</span>
+                        </div>
+
+                        <div class="preview-body">
+                            <div class="preview-heading">
+                                <div>
+                                    <p class="preview-overline">CITIZEN PORTAL</p>
+                                    <h2>Issue overview</h2>
+                                </div>
+                                <span class="preview-date">Live tracking</span>
+                            </div>
+
+                            <div class="preview-stats">
+                                <div class="preview-stat">
+                                    <span class="stat-icon stat-icon-blue" aria-hidden="true">↗</span>
+                                    <span class="stat-label">Submitted</span>
+                                    <strong>Reports</strong>
+                                    <small>Share a local issue</small>
+                                </div>
+                                <div class="preview-stat">
+                                    <span class="stat-icon stat-icon-silver" aria-hidden="true">◎</span>
+                                    <span class="stat-label">AI assisted</span>
+                                    <strong>Routing</strong>
+                                    <small>Find the right team</small>
+                                </div>
+                            </div>
+
+                            <div class="preview-activity">
+                                <div class="activity-heading">
+                                    <strong>Report journey</strong>
+                                    <span>Simple & transparent</span>
+                                </div>
+
+                                <div class="activity-row">
+                                    <span class="activity-symbol">01</span>
+                                    <div class="activity-copy">
+                                        <strong>Issue reported</strong>
+                                        <span>Details and photo submitted</span>
+                                    </div>
+                                    <span class="activity-check" aria-label="Step one">✓</span>
+                                </div>
+
+                                <div class="activity-row">
+                                    <span class="activity-symbol">02</span>
+                                    <div class="activity-copy">
+                                        <strong>AI classification</strong>
+                                        <span>Issue category identified</span>
+                                    </div>
+                                    <span class="activity-pending">•••</span>
+                                </div>
+
+                                <div class="activity-row">
+                                    <span class="activity-symbol">03</span>
+                                    <div class="activity-copy">
+                                        <strong>Department review</strong>
+                                        <span>Assigned team takes action</span>
+                                    </div>
+                                    <span class="activity-arrow">→</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="floating-note">
+                        <span class="floating-icon" aria-hidden="true">✓</span>
+                        <div>
+                            <strong>Every report matters</strong>
+                            <span>Track progress in one place</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="trust-strip" aria-label="Platform benefits">
+            <div class="container trust-grid">
+                <div class="trust-item">
+                    <span class="trust-number">01</span>
+                    <span>Easy issue reporting</span>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-number">02</span>
+                    <span>AI-assisted classification</span>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-number">03</span>
+                    <span>Clear status tracking</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding services-section" id="services">
+            <div class="container">
+                <div class="section-heading">
+                    <span class="section-kicker">WHAT YOU CAN REPORT</span>
+                    <h2>Local problems deserve <span>real attention.</span></h2>
+                    <p>
+                        Bring everyday civic issues into one organized reporting
+                        system, helping them reach the appropriate department.
+                    </p>
+                </div>
+
+                <div class="service-grid">
+                    <article class="service-card">
+                        <span class="service-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M3 17h18M5 17l2-7h10l2 7M9 10V7h6v3M8 20h.01M16 20h.01" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                        <h3>Road damage</h3>
+                        <p>Report potholes and damaged road surfaces that need attention.</p>
+                    </article>
+
+                    <article class="service-card">
+                        <span class="service-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 3v3m-4 0h8l-1 5H9L8 6ZM10 11v3a2 2 0 0 0 4 0v-3M12 16v5M8 21h8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M5 3v2m14-2v2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                        <h3>Street lighting</h3>
+                        <p>Flag broken streetlights and help identify lighting issues.</p>
+                    </article>
+
+                    <article class="service-card">
+                        <span class="service-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 3v3m0 0a4 4 0 0 0-4 4v2a4 4 0 0 0 8 0v-2a4 4 0 0 0-4-4ZM12 16v5m-4 0h8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M8 10H5m11 0h3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                        <h3>Water leakage</h3>
+                        <p>Bring leaking pipes and visible water wastage to attention.</p>
+                    </article>
+
+                    <article class="service-card">
+                        <span class="service-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M4 7h16M9 7V4h6v3m-9 0 1 13h10l1-13M10 11v5m4-5v5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                        <h3>Illegal dumping</h3>
+                        <p>Report unauthorized waste dumping in public spaces.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding process-section" id="how-it-works">
+            <div class="container">
+                <div class="section-heading">
+                    <span class="section-kicker">HOW IT WORKS</span>
+                    <h2>From report to <span>resolution.</span></h2>
+                    <p>A straightforward process designed to make civic reporting easier to follow.</p>
+                </div>
+
+                <div class="process-grid">
+                    <article class="process-card">
+                        <span class="process-number">01</span>
+                        <h3>Submit a report</h3>
+                        <p>Describe the problem, add a photo, and provide its location.</p>
+                    </article>
+                    <article class="process-card">
+                        <span class="process-number">02</span>
+                        <h3>AI helps classify it</h3>
+                        <p>The system analyzes the image and helps identify the issue category.</p>
+                    </article>
+                    <article class="process-card">
+                        <span class="process-number">03</span>
+                        <h3>Track the progress</h3>
+                        <p>The relevant team reviews the report while you follow status updates.</p>
+                    </article>
+                </div>
+
+                <div class="process-disclaimer">
+                    <span aria-hidden="true">ⓘ</span>
+                    AI classification supports the reporting workflow. Uncertain predictions may require manual review.
+                </div>
+            </div>
+        </section>
+
+        <section class="closing-section" id="about">
+            <div class="container closing-inner">
+                <div>
+                    <span class="section-kicker">A BETTER WAY TO REPORT</span>
+                    <h2>Small actions can improve our shared spaces.</h2>
+                    <p>Start by reporting a civic issue in your community.</p>
+                </div>
+                <a class="button button-light button-large" href="register.html">
+                    Get started <span aria-hidden="true">→</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <a class="brand footer-brand" href="index.html">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M4 18.5V10l8-5 8 5v8.5M9 18.5v-5h6v5M2.5 21h19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+                <span>CivicFix <span class="brand-light">AI</span></span>
+            </a>
+            <p>Building a clearer path from civic reporting to action.</p>
+            <span class="footer-copyright">© <span id="currentYear"></span> CivicFix AI</span>
+        </div>
+    </footer>
+
+    <script src="js/home.js"></script>
+</body>
+</html>

@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CivicFix AI administration dashboard for managing departments, AI categories and civic complaints.">
+
+    <title>CivicFix AI | Administration</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body>
+    <div class="admin-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="admin-sidebar">
+
+            <a class="brand" href="admin.html" aria-label="CivicFix AI Administration home">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path
+                            d="M4 18.5V10l8-5 8 5v8.5"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                        <path
+                            d="M9 18.5v-5h6v5M2.5 21h19"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                        <path
+                            d="m9.5 9.5 1.7 1.7 3.5-3.5"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                    </svg>
+                </span>
+
+                <span class="brand-name">
+                    CivicFix <span class="brand-light">AI</span>
+                </span>
+
+                <span class="brand-subtitle">Administration</span>
+            </a>
+
+            <!-- NAVIGATION -->
+            <nav class="sidebar-nav" aria-label="Administration navigation">
+                <a class="nav-link active" href="#dashboard">Dashboard</a>
+                <a class="nav-link" href="#reassignmentRequests">Department Reassignment</a>
+                <a class="nav-link" href="#rejectionRequests">Rejection Requests</a>
+                <a class="nav-link" href="#departments">Departments</a>
+                <a class="nav-link" href="#addDepartment">Add Department</a>
+            </nav>
+
+            <button id="logoutButton" class="logout-button" type="button">
+                Log Out
+            </button>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="admin-main">
+
+            <!-- PAGE HEADER -->
+            <header class="page-header">
+                <div>
+                    <p class="eyebrow">ADMINISTRATION PANEL</p>
+
+                    <h1>
+                        Welcome,
+                        <span id="welcomeName">Administrator</span>
+                    </h1>
+
+                    <p class="page-description">
+                        Manage departments, AI categories and complaint assignments.
+                    </p>
+                </div>
+
+                <button id="refreshButton" class="secondary-button" type="button">
+                    <span aria-hidden="true">↻</span>
+                    Refresh
+                </button>
+            </header>
+
+            <!-- DASHBOARD STATISTICS -->
+            <section
+                id="dashboard"
+                class="stats-grid"
+                aria-label="Dashboard statistics"
+            >
+                <article class="stat-card">
+                    <span class="stat-label">Total Departments</span>
+                    <strong id="totalDepartments" class="stat-value">—</strong>
+                    <span class="stat-note">Registered departments</span>
+                </article>
+
+                <article class="stat-card">
+                    <span class="stat-label">Active Departments</span>
+                    <strong id="activeDepartments" class="stat-value">—</strong>
+                    <span class="stat-note">Available for assignment</span>
+                </article>
+
+                <article class="stat-card">
+                    <span class="stat-label">Total Complaints</span>
+                    <strong id="totalComplaints" class="stat-value">—</strong>
+                    <span class="stat-note">All submitted reports</span>
+                </article>
+
+                <article class="stat-card">
+                    <span class="stat-label">Pending Complaints</span>
+                    <strong id="pendingComplaints" class="stat-value">—</strong>
+                    <span class="stat-note">Awaiting resolution</span>
+                </article>
+            </section>
+
+            <!-- DEPARTMENT REASSIGNMENT REQUESTS -->
+            <section id="reassignmentRequests" class="panel">
+
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow">MANUAL COMPLAINT ASSIGNMENT</p>
+                        <h2>Department Reassignment Requests</h2>
+
+                        <p class="muted">
+                            Review complaints marked as belonging to the wrong department.
+                            Choose the correct department and manually reassign each complaint.
+                        </p>
+                    </div>
+
+                    <span id="pendingReassignmentCount" class="category-tag">
+                        0 pending requests
+                    </span>
+                </div>
+
+                <!-- SEARCH AND FILTER -->
+                <div class="table-controls">
+                    <input
+                        id="reassignmentSearch"
+                        type="search"
+                        placeholder="Search complaint ID or department..."
+                        aria-label="Search department reassignment requests"
+                    >
+
+                    <select
+                        id="reassignmentStatusFilter"
+                        aria-label="Filter reassignment requests"
+                    >
+                        <option value="pending">Pending assignment</option>
+                        <option value="assigned">Already assigned</option>
+                        <option value="all">All requests</option>
+                    </select>
+                </div>
+
+                <!-- REQUEST TABLE -->
+                <div class="table-wrapper">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Complaint</th>
+                                <th scope="col">Current Department</th>
+                                <th scope="col">Reason</th>
+                                <th scope="col">Request Date</th>
+                                <th scope="col">Assign To</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="reassignmentRequestTableBody">
+                            <tr>
+                                <td colspan="6" class="admin-table-empty">
+                                    Department reassignment requests will appear here.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p
+                    id="reassignmentRequestResultCount"
+                    class="result-count"
+                    aria-live="polite"
+                >
+                    0 requests
+                </p>
+
+            </section>
+
+            <!-- REJECTION REQUEST MANAGEMENT -->
+            <section id="rejectionRequests" class="panel">
+
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow">COMPLAINT REVIEW</p>
+                        <h2>Rejection Requests</h2>
+
+                        <p class="muted">
+                            Review department requests before deciding whether a complaint
+                            should be rejected.
+                        </p>
+                    </div>
+
+                    <span id="pendingRejectionCount" class="category-tag">
+                        0 pending requests
+                    </span>
+                </div>
+
+                <div class="table-controls">
+                    <input
+                        id="rejectionSearch"
+                        type="search"
+                        placeholder="Search complaint ID or department..."
+                        aria-label="Search rejection requests"
+                    >
+
+                    <select
+                        id="rejectionStatusFilter"
+                        aria-label="Filter rejection requests"
+                    >
+                        <option value="pending">Pending review</option>
+                        <option value="approved">Approved</option>
+                        <option value="disapproved">Disapproved</option>
+                        <option value="all">All requests</option>
+                    </select>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Complaint</th>
+                                <th scope="col">Department</th>
+                                <th scope="col">Rejection Reason</th>
+                                <th scope="col">Request Date</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="rejectionRequestTableBody">
+                            <tr>
+                                <td colspan="5" class="admin-table-empty">
+                                    Rejection requests will appear here.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p
+                    id="rejectionRequestResultCount"
+                    class="result-count"
+                    aria-live="polite"
+                >
+                    0 requests
+                </p>
+
+            </section>
+
+            <!-- DEPARTMENT MANAGEMENT -->
+            <section id="departments" class="panel">
+
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow">TEAM MANAGEMENT</p>
+                        <h2>Departments</h2>
+
+                        <p class="muted">
+                            Manage the teams responsible for AI-detected issues.
+                        </p>
+                    </div>
+
+                    <button
+                        id="openAddDepartment"
+                        class="primary-button"
+                        type="button"
+                    >
+                        <span aria-hidden="true">+</span>
+                        Add Department
+                    </button>
+                </div>
+
+                <!-- SEARCH AND FILTERS -->
+                <div class="table-controls">
+                    <input
+                        id="departmentSearch"
+                        type="search"
+                        placeholder="Search name or email..."
+                        aria-label="Search departments"
+                    >
+
+                    <select
+                        id="departmentStatusFilter"
+                        aria-label="Filter department status"
+                    >
+                        <option value="all">All statuses</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+
+                <!-- DEPARTMENT TABLE -->
+                <div class="table-wrapper">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Department</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Created</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="departmentTableBody">
+                            <tr>
+                                <td colspan="5" class="admin-table-empty">
+                                    Loading departments...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p
+                    id="departmentResultCount"
+                    class="result-count"
+                    aria-live="polite"
+                >
+                    Loading department records...
+                </p>
+            </section>
+
+            <!-- CREATE DEPARTMENT -->
+            <section id="addDepartment" class="panel form-panel">
+
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow">ACCOUNT SETUP</p>
+                        <h2>Create a Department</h2>
+
+                        <p class="muted">
+                            Assign available categories from your loaded YOLO model.
+                            Each category can be allocated to only one department.
+                        </p>
+                    </div>
+                </div>
+
+                <form id="addDepartmentForm">
+
+                    <div class="form-grid">
+
+                        <div class="form-field">
+                            <label for="departmentName">Department name</label>
+
+                            <input
+                                id="departmentName"
+                                name="name"
+                                type="text"
+                                placeholder="e.g. Road & Public Works"
+                                autocomplete="organization"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-field">
+                            <label for="departmentEmail">Department login email</label>
+
+                            <input
+                                id="departmentEmail"
+                                name="email"
+                                type="email"
+                                placeholder="department@example.com"
+                                autocomplete="email"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-field">
+                            <label for="departmentPassword">Temporary password</label>
+
+                            <input
+                                id="departmentPassword"
+                                name="password"
+                                type="password"
+                                minlength="8"
+                                placeholder="At least 8 characters"
+                                autocomplete="new-password"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-field">
+                            <label for="departmentStatus">Account status</label>
+
+                            <select id="departmentStatus" name="status">
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <!-- AI CATEGORIES -->
+                    <div class="category-section">
+
+                        <div class="category-heading">
+                            <div>
+                                <h3>AI categories</h3>
+
+                                <p class="muted">
+                                    Select the available model categories this department handles.
+                                    Already allocated categories will not appear here.
+                                </p>
+                            </div>
+
+                            <span class="category-tag">From best.pt</span>
+                        </div>
+
+                        <div
+                            id="categoryList"
+                            class="category-list"
+                            aria-live="polite"
+                            aria-label="Available AI categories"
+                        >
+                            Loading available model categories...
+                        </div>
+                    </div>
+
+                    <!-- FORM FEEDBACK -->
+                    <div
+                        id="departmentFormMessage"
+                        class="admin-form-message"
+                        role="status"
+                        aria-live="polite"
+                    ></div>
+
+                    <!-- FORM BUTTONS -->
+                    <div class="form-actions">
+                        <button
+                            id="resetDepartmentForm"
+                            class="secondary-button"
+                            type="reset"
+                        >
+                            Reset
+                        </button>
+
+                        <button
+                            id="createDepartmentButton"
+                            class="primary-button"
+                            type="submit"
+                        >
+                            Create Department
+                        </button>
+                    </div>
+
+                </form>
+            </section>
+
+            <!-- FOOTER -->
+            <footer class="admin-footer">
+                <span>CivicFix AI Administration</span>
+
+                <span>
+                    © <span id="currentYear"></span>
+                </span>
+            </footer>
+
+        </main>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>

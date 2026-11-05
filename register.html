@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#F8FAFC">
+    <title>Create Account | CivicFix AI</title>
+
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/register.css">
+</head>
+<body>
+    <main class="register-page">
+
+        <section class="register-form-panel">
+
+            <!-- Same inline SVG logo as the homepage -->
+            <a href="index.html" class="register-brand"
+               aria-label="CivicFix AI home">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M4 18.5V10l8-5 8 5v8.5"
+                              stroke="currentColor" stroke-width="1.8"
+                              stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M9 18.5v-5h6v5M2.5 21h19"
+                              stroke="currentColor" stroke-width="1.8"
+                              stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="m9.5 9.5 1.7 1.7 3.5-3.5"
+                              stroke="currentColor" stroke-width="1.8"
+                              stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+                <span class="brand-name">CivicFix <span class="brand-light">AI</span></span>
+            </a>
+
+            <div class="register-content">
+                <p class="register-eyebrow">JOIN YOUR COMMUNITY</p>
+
+                <h1>Create your account</h1>
+
+                <p class="register-description">
+                    Report civic issues and help make your neighbourhood better.
+                </p>
+
+                <form id="registerForm" novalidate>
+                    <div class="register-field">
+                        <label for="fullName">Full name</label>
+                        <input
+                            type="text"
+                            id="fullName"
+                            name="fullName"
+                            placeholder="Enter your full name"
+                            autocomplete="name"
+                            maxlength="100"
+                            required
+                        >
+                    </div>
+
+                    <div class="register-field">
+                        <label for="email">Email address</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="you@example.com"
+                            autocomplete="email"
+                            maxlength="254"
+                            required
+                        >
+                    </div>
+
+                    <div class="register-field">
+                        <label for="password">Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Create a password"
+                            autocomplete="new-password"
+                            minlength="8"
+                            required
+                        >
+                        <small>Use at least 8 characters.</small>
+                    </div>
+
+                    <div class="register-field">
+                        <label for="confirmPassword">Confirm password</label>
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            placeholder="Enter your password again"
+                            autocomplete="new-password"
+                            minlength="8"
+                            required
+                        >
+                    </div>
+
+                    <p id="registerMessage" class="register-message"
+                       role="status" aria-live="polite"></p>
+
+                    <button type="submit" id="registerButton"
+                            class="register-submit">
+                        <span>Create Account</span>
+                        <span aria-hidden="true">→</span>
+                    </button>
+                </form>
+
+                <p class="register-signin">
+                    Already have an account?
+                    <a href="login.html">Sign in</a>
+                </p>
+            </div>
+
+            <p class="register-footer">
+                CivicFix AI <span aria-hidden="true">·</span>
+                Building better communities together
+            </p>
+        </section>
+
+        <aside class="register-visual-panel">
+            <div class="register-visual-content">
+                <span class="register-visual-tag">YOUR CITY. YOUR VOICE.</span>
+
+                <h2>Small actions.<br>Better communities.</h2>
+
+                <p>
+                    Every reported issue is a step toward a cleaner,
+                    safer and better-connected neighbourhood.
+                </p>
+
+                <div class="city-illustration" aria-hidden="true">
+                    <div class="city-sun"></div>
+
+                    <div class="city-building building-one">
+                        <span></span><span></span><span></span>
+                        <span></span><span></span><span></span>
+                    </div>
+
+                    <div class="city-building building-two">
+                        <span></span><span></span>
+                        <span></span><span></span>
+                        <span></span><span></span>
+                    </div>
+
+                    <div class="city-building building-three">
+                        <span></span><span></span><span></span>
+                        <span></span><span></span><span></span>
+                    </div>
+
+                    <div class="city-ground"></div>
+                </div>
+
+                <div class="register-visual-caption">
+                    <span class="caption-dot"></span>
+                    <span>Better cities start with us.</span>
+                </div>
+            </div>
+        </aside>
+
+    </main>
+
+    <script src="js/register.js"></script>
+</body>
+</html>

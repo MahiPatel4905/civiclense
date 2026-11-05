@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sign in to CivicFix AI to manage and track civic issues.">
+    <title>Sign In | CivicFix AI</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+
+<body class="auth-page">
+
+    <main class="auth-layout">
+
+        <!-- LEFT SIDE: LOGIN -->
+        <section class="auth-main">
+
+            <!-- Homepage logo: inline SVG -->
+            <a href="index.html" class="auth-brand" aria-label="CivicFix AI home">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M4 18.5V10l8-5 8 5v8.5"
+                              stroke="currentColor"
+                              stroke-width="1.8"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                        <path d="M9 18.5v-5h6v5M2.5 21h19"
+                              stroke="currentColor"
+                              stroke-width="1.8"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                        <path d="m9.5 9.5 1.7 1.7 3.5-3.5"
+                              stroke="currentColor"
+                              stroke-width="1.8"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                    </svg>
+                </span>
+                <span class="brand-name">CivicFix <span class="brand-light">AI</span></span>
+            </a>
+
+            <div class="auth-form-wrap">
+
+                <div class="auth-heading">
+
+                    <div class="role-badge" id="roleBadge">
+                        <span class="role-badge-dot"></span>
+                        <span id="roleBadgeText">CITIZEN PORTAL</span>
+                    </div>
+
+                    <h1 id="loginHeading">Citizen Sign In</h1>
+
+                    <p id="loginDescription">
+                        Report local issues, upload photos, and track your complaints from one place.
+                    </p>
+                </div>
+
+                <form id="loginForm">
+
+                    <fieldset class="role-fieldset" id="roleSelector">
+                        <legend>Select your portal</legend>
+
+                        <div class="role-options">
+
+                            <label class="role-option">
+                                <input
+                                    type="radio"
+                                    name="role"
+                                    value="user"
+                                    checked
+                                >
+                                <span class="role-option-content">
+                                    <strong>Citizen</strong>
+                                    <small>Report issues</small>
+                                </span>
+                            </label>
+
+                            <label class="role-option">
+                                <input
+                                    type="radio"
+                                    name="role"
+                                    value="department"
+                                >
+                                <span class="role-option-content">
+                                    <strong>Department</strong>
+                                    <small>Manage complaints</small>
+                                </span>
+                            </label>
+
+                        </div>
+                    </fieldset>
+
+                    <div class="form-field">
+                        <label for="email">Email address</label>
+
+                        <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            placeholder="Enter your registered email"
+                            autocomplete="username"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-field">
+
+                        <div class="field-heading">
+                            <label for="password">Password</label>
+
+                            <a href="#" class="forgot-link" id="forgotPasswordLink">
+                                Forgot password?
+                            </a>
+                        </div>
+
+                        <!-- Password field intentionally has NO eye icon -->
+                        <div class="password-wrapper">
+                            <input
+                                id="password"
+                                name="password"
+                                type="password"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            >
+                        </div>
+
+                    </div>
+
+                    <p
+                        class="form-message"
+                        id="formMessage"
+                        role="status"
+                        aria-live="polite"
+                    ></p>
+
+                    <button class="button button-primary submit-button" type="submit">
+                        <span id="submitButtonText">Sign in as Citizen</span>
+                        <span aria-hidden="true">→</span>
+                    </button>
+
+                    <p class="signup-prompt" id="signupPrompt">
+                        Don't have a citizen account?
+                        <a href="register.html">Create an account</a>
+                    </p>
+
+                </form>
+
+                <div class="auth-bottom">
+                    <a href="index.html">← Back to home</a>
+                    <span aria-hidden="true">·</span>
+                    <button type="button" id="adminAccessLink" class="text-link">
+                        Administrator access
+                    </button>
+                </div>
+
+            </div>
+
+            <p class="auth-copyright">
+                © <span id="authYear"></span> CivicFix AI. All rights reserved.
+            </p>
+
+        </section>
+
+        <!-- RIGHT SIDE: BRAND PANEL -->
+        <aside class="auth-aside">
+
+            <div class="aside-decoration aside-decoration-one"></div>
+            <div class="aside-decoration aside-decoration-two"></div>
+
+            <div class="aside-content">
+
+                <span class="aside-label">
+                    <span class="aside-label-dot"></span>
+                    SMARTER CIVIC SERVICES
+                </span>
+
+                <h2 id="asideHeading">
+                    Your city. Your voice. Your impact.
+                </h2>
+
+                <p id="asideDescription">
+                    Report civic problems, follow progress, and help local issues reach the right team.
+                </p>
+
+                <div class="aside-illustration" aria-hidden="true">
+
+                    <div class="illustration-building building-one">
+                        <span></span><span></span><span></span>
+                        <span></span><span></span><span></span>
+                    </div>
+
+                    <div class="illustration-building building-two">
+                        <span></span><span></span>
+                        <span></span><span></span>
+                        <span></span><span></span>
+                    </div>
+
+                    <div class="illustration-building building-three">
+                        <span></span><span></span><span></span>
+                        <span></span><span></span><span></span>
+                    </div>
+
+                    <div class="illustration-ground"></div>
+
+                    <div class="illustration-report">
+                        <span class="report-check">✓</span>
+                        <div>
+                            <strong id="illustrationTitle">Report received</strong>
+                            <span id="illustrationDescription">Your issue starts here</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="aside-footer">
+                    <span id="stepOne">REPORT</span>
+                    <span class="aside-footer-line"></span>
+                    <span id="stepTwo">TRACK</span>
+                    <span class="aside-footer-line"></span>
+                    <span id="stepThree">RESOLVE</span>
+                </div>
+
+            </div>
+
+        </aside>
+
+    </main>
+
+    <script src="js/auth.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#F8FAFC">
+    <meta name="description" content="View and track your CivicFix AI complaints.">
+    <title>My Reports | CivicFix AI</title>
+
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/my-reports.css">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="container header-inner">
+        <a class="brand" href="report.html" aria-label="CivicFix AI dashboard">
+            <span class="brand-mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M4 18.5V10l8-5 8 5v8.5"
+                          stroke="currentColor" stroke-width="1.8"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9 18.5v-5h6v5M2.5 21h19"
+                          stroke="currentColor" stroke-width="1.8"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="m9.5 9.5 1.7 1.7 3.5-3.5"
+                          stroke="currentColor" stroke-width="1.8"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+            <span>CivicFix <span class="brand-light">AI</span></span>
+        </a>
+
+        <button class="mobile-menu-toggle" id="mobile-menu-toggle"
+                type="button" aria-label="Open navigation"
+                aria-expanded="false" aria-controls="main-nav">
+            <span></span><span></span><span></span>
+        </button>
+
+        <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+            <a href="report.html" class="nav-link">Dashboard</a>
+            <a href="report.html#report-form-section" class="nav-link">Report an Issue</a>
+            <a href="my-reports.html" class="nav-link active"
+               aria-current="page">My Reports</a>
+        </nav>
+
+        <div class="header-actions">
+            <div class="user-chip">
+                <span class="user-avatar" id="user-avatar" aria-hidden="true">U</span>
+                <span id="user-name">Citizen</span>
+            </div>
+            <button class="button button-secondary sign-out-btn"
+                    id="sign-out-btn" type="button">Sign out</button>
+        </div>
+    </div>
+</header>
+
+<main class="container reports-page">
+
+    <section class="page-heading">
+        <div>
+            <p class="eyebrow">
+                <span class="eyebrow-dot" aria-hidden="true"></span>
+                CITIZEN PORTAL
+            </p>
+            <h1>My Reports</h1>
+            <p class="page-description">
+                Keep track of the civic issues you've reported and follow
+                their progress in one place.
+            </p>
+        </div>
+
+        <a href="report.html#report-form-section"
+           class="button button-primary new-report-button">
+            <span aria-hidden="true">＋</span> Report an Issue
+        </a>
+    </section>
+
+    <section class="stats-grid" aria-label="Report summary">
+        <article class="stat-card">
+            <span class="stat-icon total-icon" aria-hidden="true">▤</span>
+            <div>
+                <p>Total reports</p>
+                <h2 id="total-count">—</h2>
+                <span class="stat-description">All submitted complaints</span>
+            </div>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-icon progress-icon" aria-hidden="true">◷</span>
+            <div>
+                <p>In progress</p>
+                <h2 id="progress-count">—</h2>
+                <span class="stat-description">Being addressed</span>
+            </div>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-icon resolved-icon" aria-hidden="true">✓</span>
+            <div>
+                <p>Resolved</p>
+                <h2 id="resolved-count">—</h2>
+                <span class="stat-description">Marked as resolved</span>
+            </div>
+        </article>
+
+        <article class="stat-card">
+            <span class="stat-icon pending-icon" aria-hidden="true">◌</span>
+            <div>
+                <p>Pending</p>
+                <h2 id="pending-count">—</h2>
+                <span class="stat-description">Awaiting resolution</span>
+            </div>
+        </article>
+    </section>
+
+    <section class="reports-panel">
+        <div class="panel-heading">
+            <div>
+                <h2>Your complaints</h2>
+                <p id="results-summary">Loading your reports...</p>
+            </div>
+
+            <button type="button" class="button button-secondary refresh-button"
+                    id="refresh-reports">
+                <span aria-hidden="true">↻</span> Refresh
+            </button>
+        </div>
+
+        <div class="report-controls">
+            <label class="search-box" for="report-search">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <circle cx="10.8" cy="10.8" r="6.8"
+                            stroke="currentColor" stroke-width="1.8"/>
+                    <path d="m16 16 4.5 4.5"
+                          stroke="currentColor" stroke-width="1.8"
+                          stroke-linecap="round"/>
+                </svg>
+                <input id="report-search" type="search"
+                       placeholder="Search ID, category or location..."
+                       autocomplete="off">
+            </label>
+
+            <label class="filter-control" for="status-filter">
+                <span>Status</span>
+                <select id="status-filter">
+                    <option value="all">All statuses</option>
+                    <option value="progress">In progress</option>
+                    <option value="pending">Pending</option>
+                    <option value="resolved">Resolved</option>
+                    <option value="rejected">Rejected</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="report-list" id="report-list" aria-live="polite">
+            <div class="loading-state">
+                <span class="loading-spinner" aria-hidden="true"></span>
+                <p>Loading your reports...</p>
+            </div>
+        </div>
+
+        <div class="list-footer">
+            <span id="report-count-label">0 reports</span>
+            <button type="button" class="text-button" id="clear-filters" hidden>
+                Clear filters
+            </button>
+        </div>
+    </section>
+
+    <section class="help-note">
+        <span class="help-note-icon" aria-hidden="true">i</span>
+        <p>
+            Your complaint ID can help you identify a report when contacting
+            the support team. Status updates appear here after they are saved
+            by the responsible team.
+        </p>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container footer-inner">
+        <a class="brand footer-brand" href="report.html"
+           aria-label="CivicFix AI dashboard">
+            <span class="brand-mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M4 18.5V10l8-5 8 5v8.5"
+                          stroke="currentColor" stroke-width="1.8"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9 18.5v-5h6v5M2.5 21h19"
+                          stroke="currentColor" stroke-width="1.8"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="m9.5 9.5 1.7 1.7 3.5-3.5"
+                          stroke="currentColor" stroke-width="1.8"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+            <span>CivicFix <span class="brand-light">AI</span></span>
+        </a>
+        <p>Building better communities, one report at a time.</p>
+    </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/my-reports.js"></script>
+</body>
+</html>
